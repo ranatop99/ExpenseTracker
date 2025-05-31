@@ -1,7 +1,16 @@
+using ExpenseTracker.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Add services to the DbContext
+builder.Services.AddDbContext<ExpenseTrackerContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+
+
 
 var app = builder.Build();
 
