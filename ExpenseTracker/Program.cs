@@ -1,4 +1,5 @@
 using ExpenseTracker.Data;
+using ExpenseTracker.Data.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,10 @@ builder.Services.AddControllersWithViews();
 
 //Add services to the DbContext
 builder.Services.AddDbContext<ExpenseTrackerContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+
+//Add services to the ExpensesService
+builder.Services.AddScoped<IExpensesService, ExpensesService>();
 
 
 
